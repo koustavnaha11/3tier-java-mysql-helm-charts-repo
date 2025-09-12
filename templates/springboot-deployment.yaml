@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-springboot-app
+  labels:
+    app: my-springboot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-springboot-app
+  template:
+    metadata:
+      labels:
+        app: my-springboot-app
+    spec:
+      containers:
+        - name: my-springboot-app
+          image: {{ .Values.springboot.image }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/{{ .Values.mysql.database }}
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{ .Values.mysql.rootPassword }}
