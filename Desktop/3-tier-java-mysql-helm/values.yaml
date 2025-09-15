@@ -1,0 +1,8 @@
+mysql:
+  rootPassword: admin123
+  database: mydb
+  pvcSize: 5Gi
+
+springboot:
+  image: koustavnaha11/my-springboot-app:latest
+  nodePort: 30080
